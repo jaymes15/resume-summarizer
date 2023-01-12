@@ -16,6 +16,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Make Env file
+        run: mv sample.env.build .env
       - name: Test
         run: docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
 
@@ -25,6 +27,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Make Env file
+        run: mv sample.env.build .env
       - name: Lint
         run: docker-compose run --rm app sh -c "flake8"
   
@@ -34,5 +38,7 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: Make Env file
+        run: mv sample.env.build .env
       - name: Isort
         run: docker-compose run --rm app sh -c "isort --check-only ."
