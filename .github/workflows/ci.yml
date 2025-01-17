@@ -1,0 +1,75 @@
+---
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - master
+      - production
+      - main
+  pull_request: []
+
+jobs:
+  setup:
+    name: Setup Environment
+    runs-on: ubuntu-20.04
+    outputs:
+      docker_compose_path: ${{ steps.set_docker_compose_path.outputs.docker_compose_path }}
+    steps:
+      - name: Install Docker Compose
+        id: set_docker_compose_path
+        run: |
+          sudo curl -L "https://github.com/docker/compose/releases/download/2.20.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+          sudo chmod +x /usr/local/bin/docker-compose
+          echo "::set-output name=docker_compose_path::/usr/local/bin/docker-compose"
+
+  test:
+    name: Test
+    needs: setup
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Link Docker Compose
+        run: ln -s ${{ needs.setup.outputs.docker_compose_path }} /usr/local/bin/docker-compose
+
+      - name: Make Env file
+        run: mv .sample.build.env .env
+
+      - name: Test
+        run: docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py test"
+
+  lint:
+    name: Lint
+    needs: setup
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Link Docker Compose
+        run: ln -s ${{ needs.setup.outputs.docker_compose_path }} /usr/local/bin/docker-compose
+
+      - name: Make Env file
+        run: mv .sample.build.env .env
+
+      - name: Lint
+        run: docker-compose run --rm app sh -c "flake8"
+  
+  isort:
+    name: Isort
+    needs: setup
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Link Docker Compose
+        run: ln -s ${{ needs.setup.outputs.docker_compose_path }} /usr/local/bin/docker-compose
+
+      - name: Make Env file
+        run: mv .sample.build.env .env
+
+      - name: Isort
+        run: docker-compose run --rm app sh -c "isort --check-only ."
