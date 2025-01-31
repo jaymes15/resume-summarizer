@@ -6,7 +6,6 @@ from rest_framework import status
 from rest_framework.views import Response, exception_handler
 
 
-
 def resume_file_path(instance, filename):
     """Generate file path for the resume while keeping the original filename"""
     return os.path.join(os.environ.get("IMAGE_PATH", "uploads/resumes/"), filename)

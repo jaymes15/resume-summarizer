@@ -2,7 +2,9 @@ import threading
 
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from core.integrations.defaults import default_resume_summarizer, default_extract_resume_text
+
+from core.integrations.defaults import (default_extract_resume_text,
+                                        default_resume_summarizer)
 from core.utils import resume_file_path
 from core.validators import validate_pdf_file
 

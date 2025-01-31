@@ -1,5 +1,6 @@
 import pdfplumber
 
+
 def extract_text_from_pdf(resume):
     """Extracts text content from the uploaded resume PDF."""
     if not resume:

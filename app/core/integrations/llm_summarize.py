@@ -1,5 +1,7 @@
 import os
+
 from openai import OpenAI
+
 
 def open_ai_llm_summarizer(resume_content):
         """Uses LLM to extract applicant name and generate a summary."""
