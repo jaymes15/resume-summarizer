@@ -1,4 +1,4 @@
-FROM python:3.8-alpine
+FROM python:3.8
 
 ENV PYTHONUNBUFFERED 1
 
@@ -10,49 +10,9 @@ COPY ./scripts/ /scripts/
 
 RUN chmod +x /scripts/*
 
-RUN apk update
-
 RUN pip install --upgrade pip
 
-RUN apk add --update --no-cache postgresql-client jpeg-dev
-
-RUN apk add --update --no-cache --virtual .tmp-build-deps \
-      gcc libc-dev libffi-dev linux-headers postgresql-dev musl-dev \
-      zlib zlib-dev openssl-dev rust 
-
-RUN apk add --update \
-  build-base \
-  cairo \
-  cairo-dev \
-  cargo \
-  freetype-dev \
-  gcc \
-  gdk-pixbuf-dev \
-  gettext \
-  jpeg-dev \
-  lcms2-dev \
-  libffi-dev \
-  musl-dev \
-  openjpeg-dev \
-  openssl-dev \
-  pango-dev \
-  poppler-utils \
-  postgresql-client \
-  postgresql-dev \
-  py-cffi \
-  python3-dev \
-  rust \
-  tcl-dev \
-  tiff-dev \
-  tk-dev \
-  zlib-dev \
-  linux-headers
-
-RUN pip install cryptography
-
 RUN pip install -r requirements.txt
-
-RUN apk del .tmp-build-deps
 
 COPY ./app /app
 

@@ -15,35 +15,12 @@ Written with [Django](https://www.djangoproject.com/) and [DRF](https://www.djan
  - install docker-compose
  - Clone the project  
  - Change directory to the project directory 
+ - Run `cp .sample.build.env .env`
  - Run:
     ```bash
         docker-compose up
     ```
   - The application would be available at http://127.0.0.1:8000
-
-**To start project without Docker using virtualenv:**
- - Change directory to the project directory     
- - create a virtualenv
- - activate the previously created virtualenv
- - Run:
-    ```bash
-        pip install -r <path_to_requirements.txt>
-    ```
- - Change directory to the directory of ```manage.py``` file
- - Run to makemigrations: 
-    ```bash
-        python manage.py makemigrations
-    ```
- - Run to migrate:
-    ```bash
-        python manage.py migrate
-    ```
- - Run to runserver:
-    ```bash
-        python manage.py runserver
-    ```
-  - The application would be available at http://127.0.0.1:8000
-
 
 ## Project commands using docker
 
