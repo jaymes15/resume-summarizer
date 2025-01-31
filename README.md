@@ -22,6 +22,8 @@ Written with [Django](https://www.djangoproject.com/) and [DRF](https://www.djan
     ```
   - The application would be available at http://127.0.0.1:8000
 
+## API Docs
+You can find the API docs at http://localhost:8000/api_docs/
 ## Project commands using docker
 
 Start a new app:
