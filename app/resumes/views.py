@@ -11,7 +11,7 @@ class ResumeViewSet(
     mixins.ListModelMixin,
 ):
     """Resume API endpoint"""
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAdminUser,)
 
     queryset = Resume.objects.all()
     serializer_class = serializers.ResumeSerializer

@@ -1,0 +1,5 @@
+from core.integrations.extract_text_from_resume import extract_text_from_pdf
+from core.integrations.llm_summarize import open_ai_llm_summarizer
+
+default_extract_resume_text = extract_text_from_pdf
+default_resume_summarizer = open_ai_llm_summarizer
