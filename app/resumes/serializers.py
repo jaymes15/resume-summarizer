@@ -19,8 +19,6 @@ class UploadResumeSerializer(serializers.ModelSerializer):
         model = Resume
         fields = ("id", "resume")
         read_only_fields = ("id",)
-    
+
     def create(self, validated_data):
         return Resume.objects.create(summary="", **validated_data)
-
-

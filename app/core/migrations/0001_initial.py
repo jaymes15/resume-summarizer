@@ -10,19 +10,32 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Resume',
+            name="Resume",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('resume', models.FileField(upload_to=core.utils.resume_file_path, validators=[core.validators.validate_pdf_file])),
-                ('summary', models.TextField(blank=True, null=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "resume",
+                    models.FileField(
+                        upload_to=core.utils.resume_file_path,
+                        validators=[core.validators.validate_pdf_file],
+                    ),
+                ),
+                ("summary", models.TextField(blank=True, null=True)),
             ],
             options={
-                'verbose_name_plural': 'Resumes',
+                "verbose_name_plural": "Resumes",
             },
         ),
     ]

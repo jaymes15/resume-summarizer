@@ -10,6 +10,7 @@ def resume_file_path(instance, filename):
     """Generate file path for the resume while keeping the original filename"""
     return os.path.join(os.environ.get("IMAGE_PATH", "uploads/resumes/"), filename)
 
+
 def custom_exception_handler(message, context):
     # Call REST framework's default exception handler first
     # to get the standard error response.
@@ -20,21 +21,14 @@ def custom_exception_handler(message, context):
         # if there is an IntegrityError and the error response
         # hasn't already been generated
         response = Response(
-            {
-                'message': str(message)
-            },
-            status=status.HTTP_400_BAD_REQUEST
+            {"message": str(message)}, status=status.HTTP_400_BAD_REQUEST
         )
 
-    elif isinstance(message, ValidationError) \
-            and not response:
+    elif isinstance(message, ValidationError) and not response:
         # if there is an ValidationError and the error response
         # hasn't already been generated
         response = Response(
-            {
-                'message': str(message)
-            },
-            status=status.HTTP_400_BAD_REQUEST
+            {"message": str(message)}, status=status.HTTP_400_BAD_REQUEST
         )
 
     return response
@@ -46,8 +40,7 @@ def validation_error(message, code=None, field="__all__", params=None):
     """
     if code is not None:
         return ValidationError(
-            message, code=code,)
-    return ValidationError(
-        {field: message}, params=params)
-
-
+            message,
+            code=code,
+        )
+    return ValidationError({field: message}, params=params)

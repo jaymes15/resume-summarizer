@@ -21,10 +21,10 @@ from rest_framework.documentation import include_docs_urls
 from rest_framework.schemas import get_schema_view
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("api/", include("resumes.urls")), 
+    path("admin/", admin.site.urls),
+    path("api/", include("resumes.urls")),
     path("api/users/", include("users.urls")),
-      path(
+    path(
         "api_docs/",
         include_docs_urls(
             title="Resume Summarizer API",
@@ -40,6 +40,7 @@ urlpatterns = [
         ),
         name="api_schema",
     ),
-    
-] + (static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-     + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT))
+] + (
+    static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+)
